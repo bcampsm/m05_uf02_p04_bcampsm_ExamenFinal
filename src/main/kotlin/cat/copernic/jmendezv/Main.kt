@@ -5,6 +5,12 @@ import kotlin.math.floor
 /**
  * Implementació i tests de tota mena
  */
+fun main() {
+
+    println(imc(90.00,1.80))
+
+
+}
 
 data class Point(val x: Double, val y: Double)
 
@@ -13,14 +19,23 @@ data class Point(val x: Double, val y: Double)
 *
 * imc = weight / height^2
 * */
-fun imc(weight: Double, height: Double): Double = TODO("Pending")
+fun imc(weight: Double, height: Double) = weight / (height * height)//test ok
 
 /*
 * https://en.wikipedia.org/wiki/Quadratic_equation
 *
 * (-b ± sqrt(b^2 - 4ac)) / 2a
 * */
-fun secondDegreeEquation(a: Double, b: Double, c: Double): Pair<Double, Double> = TODO("Pending")
+fun secondDegreeEquation(a: Double, b: Double, c: Double): Pair<Double, Double> {
+    var discriminante:Double
+    var resultado1:Double
+    var resultado2:Double
+
+    discriminante = (b*b)-(4*a*c) //calculamos el discriminante para saber cuantas soluciones tenemos
+
+    if (discriminante < 0){}
+}
+
 
 /*
 * Cálculo de la distancia entre dos puntos

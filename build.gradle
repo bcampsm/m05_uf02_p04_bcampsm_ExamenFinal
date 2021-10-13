@@ -2,9 +2,6 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.0-M1'
 }
 
-group = 'cat.copernic.jmendezv'
-version = '1.0'
-
 repositories {
     mavenCentral()
 }
