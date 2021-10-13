@@ -26,15 +26,7 @@ fun imc(weight: Double, height: Double) = weight / (height * height)//test ok
 *
 * (-b ± sqrt(b^2 - 4ac)) / 2a
 * */
-fun secondDegreeEquation(a: Double, b: Double, c: Double): Pair<Double, Double> {
-    var discriminante:Double
-    var resultado1:Double
-    var resultado2:Double
-
-    discriminante = (b*b)-(4*a*c) //calculamos el discriminante para saber cuantas soluciones tenemos
-
-    if (discriminante < 0){}
-}
+fun secondDegreeEquation(a: Double, b: Double, c: Double): Pair<Double, Double> = TODO()
 
 
 /*
