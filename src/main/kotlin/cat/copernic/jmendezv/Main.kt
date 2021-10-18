@@ -1,78 +1,118 @@
 package cat.copernic.jmendezv
 
 import kotlin.math.floor
+import kotlin.math.pow
+import kotlin.math.sqrt
+
 
 /**
- * Implementació i tests de tota mena
+ * Optimització de codi amb JUnit
  */
-fun main() {
 
-    println(imc(90.00,1.80))
+data class Punto(val x: Double, val y: Double)
+
+fun main(){
+
+    println(Pendiente(Punto(3.0,5.4),Punto(6.0,7.0)))
 
 
 }
 
-data class Point(val x: Double, val y: Double)
-
 /*
+*
+* Verificació de codi
+*
 * Índice de masa corporal
 *
 * imc = weight / height^2
 * */
-fun imc(weight: Double, height: Double) = weight / (height * height)//test ok
+fun IMC(weight: Double, height: Double): Double = weight / height.pow(2)
 
 /*
+* Verificació de codi
+*
 * https://en.wikipedia.org/wiki/Quadratic_equation
 *
 * (-b ± sqrt(b^2 - 4ac)) / 2a
 * */
-fun secondDegreeEquation(a: Double, b: Double, c: Double): Pair<Double, Double> = TODO()
-
+fun equSegundoGrado(a: Double, b: Double, c: Double): Pair<Double, Double> =
+    Pair((-b + sqrt(b.pow(2 - 4 * a * c) / 2 * a)), (-b - sqrt(b.pow(2 - 4 * a * c) / 2 * a)))
 
 /*
+* Verificació de codi
+*
 * Cálculo de la distancia entre dos puntos
 *
-* distance = √[(x2 – x1)^2 +(y2 – y1)^2]
+* distance = √[(x2 – x1)^2 + (y2 – y1)^2]
 * */
-fun distance(p1: Point, p2: Point): Double = TODO("Pending")
+fun distanciaEntre2Puntos(p1: Punto, p2: Punto): Double =//la operación esta mal, ya que no es p1.x - p2.x o p1.y - p2.y, es al reves p2.x - p1.x y (p2.y - p1.y
+    sqrt((p2.x - p1.x).pow(2) + (p2.y - p1.y).pow(2))
 
 /*
+* Verificació de codi
+*
 * Cáculo de la pendiente de una recta
 *
 * slope = (y2 – y1) / (x2 – x1)
 * */
-fun slope(p1: Point, p2: Point): Double = TODO("Pending")
+fun Pendiente(p1: Punto, p2: Punto): Double = (p2.y - p1.y) / (p2.x - p1.x)
 
 /*
+* Verificació de codi
+*
 * Cálculo del punto medio de una recta
 *
 * midpoint = ((x1+x2)/2, (y1+y2)/2)
 * */
-fun midPoint(p1: Point, p2: Point): Point = TODO("Pending")
+fun puntoMedio(p1: Punto, p2: Punto): Punto =
+    Punto((p1.x + p2.x) / 2, (p1.y + p2.y) / 2)
 
-fun displayScore(score: Double) {
+/*
+* Verificació de codi
+*
+* */
+fun calificacion(score: Double): String {
     val roundedScore = floor(score * 100) / 100
-    when (roundedScore) {
-        in 0.0..4.99 -> println("No supera")
-        in 5.0..5.99 -> println("Supera")
-        in 6.0..6.99 -> println("Bien")
-        in 7.0..8.99 -> println("Notable")
-        in 9.0..10.0 -> println("Excel·lent")
-        else -> println("Nota invalida")
+    return when (roundedScore) {
+        in 0.0..4.99 -> "No supera"
+        in 5.0..5.99 -> "Supera"
+        in 6.0..6.99 -> "Bien"
+        in 7.0..8.99 -> "Notable"
+        in 9.0..10.0 -> "Excel·lent"
+        else -> "Nota invalida"
     }
 }
 
 /*
+* Verificació de codi
+*
 * Encuentra el menor y mayor
 *
 * [2,3,1,4,7,6,5] = (1,7)
 * [] = IllegalArgumentException
 * */
-fun findMinAndMax(list: List<Int>): Pair<Int, Int> = TODO("Pending")
+fun maxMin(list: List<Int>): Pair<Int, Int> {
+    if (list.isEmpty()) throw IllegalArgumentException("Empty list")
+    val listSorted = list.sorted()
+    return Pair(listSorted.first(), listSorted.last())
+}
 
 /*
+* Verificació de codi
 *
 * Cálculo del punto más cercano a point. points es una lista de tipo Point
 *
 * */
-fun closest(point: Point, vararg points: Point): Point = TODO("Pending")
+fun masCercano(point: Punto, vararg points: Punto): Punto {
+    var p: Punto = points.first()
+    var distance = distanciaEntre2Puntos(point, p)
+
+    for (currentPoint in points) {
+        val currentDistance = distanciaEntre2Puntos(point, currentPoint)
+        if (currentDistance < distance) {
+            distance = currentDistance
+        }
+    }
+
+    return p
+}
